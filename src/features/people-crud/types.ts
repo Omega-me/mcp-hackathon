@@ -87,3 +87,35 @@ export interface GetAllPeopleParams {
 export interface PersonIdParam {
   id: string;
 }
+
+/**
+ * Person Hobby association
+ */
+export interface PersonHobby {
+  id: string;
+  personId: string;
+  hobbyId: string;
+  createdAt: string; // ISO 8601 timestamp
+}
+
+/**
+ * Request body for adding a hobby to a person
+ */
+export interface AddHobbyToPersonRequest {
+  hobbyId: number;
+}
+
+/**
+ * Response from getting person hobbies
+ */
+export interface GetPersonHobbiesResponse {
+  data: PersonHobby[];
+}
+
+/**
+ * Parameters for deleting a person hobby
+ */
+export interface DeletePersonHobbyRequest {
+  personId: string;
+  hobbyId: string;
+}

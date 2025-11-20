@@ -60,6 +60,18 @@ import {
   deletePersonToolHandler,
 } from "../people-crud/tools/delete-person-tool.js";
 import {
+  addHobbyToPersonToolMetadata,
+  addHobbyToPersonToolHandler,
+} from "../people-crud/tools/add-hobby-to-person-tool.js";
+import {
+  getPersonHobbiesToolMetadata,
+  getPersonHobbiesToolHandler,
+} from "../people-crud/tools/get-person-hobbies-tool.js";
+import {
+  deletePersonHobbyToolMetadata,
+  deletePersonHobbyToolHandler,
+} from "../people-crud/tools/delete-person-hobby-tool.js";
+import {
   getAllHobbiesToolMetadata,
   getAllHobbiesToolHandler,
 } from "../hobbies-crud/tools/get-all-hobbies-tool.js";
@@ -247,6 +259,39 @@ export function createMcpServer(): McpServer {
       inputSchema: deletePersonToolMetadata.schema,
     },
     deletePersonToolHandler
+  );
+
+  // Register add-hobby-to-person tool (People-Hobbies CRUD)
+  logger.info(`Registering tool: ${addHobbyToPersonToolMetadata.name}`);
+  server.registerTool(
+    addHobbyToPersonToolMetadata.name,
+    {
+      description: addHobbyToPersonToolMetadata.description,
+      inputSchema: addHobbyToPersonToolMetadata.schema,
+    },
+    addHobbyToPersonToolHandler
+  );
+
+  // Register get-person-hobbies tool (People-Hobbies CRUD)
+  logger.info(`Registering tool: ${getPersonHobbiesToolMetadata.name}`);
+  server.registerTool(
+    getPersonHobbiesToolMetadata.name,
+    {
+      description: getPersonHobbiesToolMetadata.description,
+      inputSchema: getPersonHobbiesToolMetadata.schema,
+    },
+    getPersonHobbiesToolHandler
+  );
+
+  // Register delete-person-hobby tool (People-Hobbies CRUD)
+  logger.info(`Registering tool: ${deletePersonHobbyToolMetadata.name}`);
+  server.registerTool(
+    deletePersonHobbyToolMetadata.name,
+    {
+      description: deletePersonHobbyToolMetadata.description,
+      inputSchema: deletePersonHobbyToolMetadata.schema,
+    },
+    deletePersonHobbyToolHandler
   );
 
   // Register get-all-hobbies tool (Hobbies CRUD - User Story 1)

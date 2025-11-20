@@ -82,3 +82,32 @@ export const DeletePersonSchema = z.object({
 });
 
 export type DeletePersonInput = z.infer<typeof DeletePersonSchema>;
+
+/**
+ * Schema for adding a hobby to a person
+ */
+export const AddHobbyToPersonSchema = z.object({
+  personId: z.string().min(1, ERROR_MESSAGES.INVALID_ID).trim(),
+  hobbyId: z.number().int().positive(),
+});
+
+export type AddHobbyToPersonInput = z.infer<typeof AddHobbyToPersonSchema>;
+
+/**
+ * Schema for getting person hobbies
+ */
+export const GetPersonHobbiesSchema = z.object({
+  personId: z.string().min(1, ERROR_MESSAGES.INVALID_ID).trim(),
+});
+
+export type GetPersonHobbiesInput = z.infer<typeof GetPersonHobbiesSchema>;
+
+/**
+ * Schema for deleting a person hobby
+ */
+export const DeletePersonHobbySchema = z.object({
+  personId: z.string().min(1, ERROR_MESSAGES.INVALID_ID).trim(),
+  hobbyId: z.string().min(1, "Invalid hobby ID format").trim(),
+});
+
+export type DeletePersonHobbyInput = z.infer<typeof DeletePersonHobbySchema>;

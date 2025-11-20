@@ -8,6 +8,10 @@
  */
 export const PEOPLE_BASE_PATH = "/people";
 export const PEOPLE_BY_ID_PATH = (id: string) => `/people/${id}`;
+export const PEOPLE_HOBBIES_PATH = (personId: string) =>
+  `/people/${personId}/hobbies`;
+export const PEOPLE_HOBBIES_BY_ID_PATH = (personId: string, hobbyId: string) =>
+  `/people/${personId}/hobbies/${hobbyId}`;
 
 /**
  * Validation Constants
