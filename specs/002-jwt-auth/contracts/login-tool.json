@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Login Tool",
+  "description": "MCP tool for user authentication via external auth API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "login",
+      "description": "Tool identifier"
+    },
+    "description": {
+      "type": "string",
+      "const": "Authenticate user with email and password, returns JWT token for accessing protected endpoints"
+    },
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User's email address",
+          "example": "user@example.com"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 1,
+          "description": "User's password",
+          "example": "SecurePassword123!"
+        }
+      },
+      "required": ["email", "password"],
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "oneOf": [
+        {
+          "title": "Success Response",
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean",
+              "const": true
+            },
+            "message": {
+              "type": "string",
+              "example": "Login successful"
+            },
+            "userId": {
+              "type": "string",
+              "description": "Unique user identifier",
+              "example": "usr_1234567890"
+            }
+          },
+          "required": ["success", "message"]
+        },
+        {
+          "title": "Error Response",
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "description": "Error type",
+              "enum": ["invalid_credentials", "validation_error", "network_error", "server_error"]
+            },
+            "details": {
+              "type": "string",
+              "description": "Human-readable error message",
+              "example": "Email or password is incorrect"
+            }
+          },
+          "required": ["error"]
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "name": "Successful login",
+      "input": {
+        "email": "user@example.com",
+        "password": "SecurePassword123!"
+      },
+      "output": {
+        "success": true,
+        "message": "Login successful",
+        "userId": "usr_1234567890"
+      }
+    },
+    {
+      "name": "Invalid credentials",
+      "input": {
+        "email": "user@example.com",
+        "password": "WrongPassword"
+      },
+      "output": {
+        "error": "invalid_credentials",
+        "details": "Email or password is incorrect"
+      }
+    },
+    {
+      "name": "Validation error",
+      "input": {
+        "email": "not-an-email",
+        "password": "test"
+      },
+      "output": {
+        "error": "validation_error",
+        "details": "Invalid email format"
+      }
+    }
+  ]
+}

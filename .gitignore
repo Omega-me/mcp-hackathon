@@ -1,0 +1,23 @@
+# Node.js / JavaScript / TypeScript
+node_modules/
+dist/
+build/
+*.log
+.env
+.env.local
+.env.*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+
+# Package manager
+pnpm-lock.yaml
+.pnpm-debug.log*

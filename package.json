@@ -1,0 +1,40 @@
+{
+  "name": "mcp-api-server",
+  "version": "1.0.0",
+  "description": "MCP server that exposes tools to query external API endpoints",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "start:stdio": "TRANSPORT=stdio node dist/stdio-entry.js",
+    "start:http": "TRANSPORT=http node dist/http-entry.js",
+    "dev": "nodemon src/index.ts",
+    "dev:stdio": "nodemon src/stdio-entry.ts",
+    "dev:http": "nodemon src/http-entry.ts",
+    "inspect": "pnpx @modelcontextprotocol/inspector http://localhost:3000/mcp"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "api",
+    "server"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.14.0",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "nodemon": "^3.1.11",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

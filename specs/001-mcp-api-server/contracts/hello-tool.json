@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Hello Tool",
+  "description": "MCP tool that queries the /api/hello endpoint",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "hello",
+      "description": "Unique identifier for the hello tool"
+    },
+    "description": {
+      "type": "string",
+      "const": "Query the hello API endpoint at /api/hello to retrieve greeting information",
+      "description": "Human-readable description of what the tool does"
+    },
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false,
+      "description": "No input parameters required for this tool"
+    }
+  },
+  "required": ["name", "description", "inputSchema"],
+  "example": {
+    "request": {
+      "method": "tools/call",
+      "params": {
+        "name": "hello",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"message\": \"Hello from API\",\n  \"timestamp\": \"2025-11-19T10:00:00Z\"\n}"
+        }
+      ]
+    }
+  },
+  "errorScenarios": [
+    {
+      "scenario": "API endpoint unreachable",
+      "error": {
+        "code": "NETWORK_ERROR",
+        "message": "Failed to connect to API at http://10.138.80.113:5000/api/hello"
+      }
+    },
+    {
+      "scenario": "API timeout",
+      "error": {
+        "code": "TIMEOUT",
+        "message": "API request timed out after 5000ms"
+      }
+    },
+    {
+      "scenario": "API returns error status",
+      "error": {
+        "code": "API_ERROR",
+        "message": "API returned error status 500: Internal Server Error"
+      }
+    }
+  ],
+  "implementation": {
+    "endpoint": "http://10.138.80.113:5000/api/hello",
+    "method": "GET",
+    "timeout": 5000,
+    "headers": {
+      "Accept": "application/json"
+    },
+    "responseFormat": "JSON string formatted with indentation"
+  }
+}

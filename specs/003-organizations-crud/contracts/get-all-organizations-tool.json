@@ -1,0 +1,53 @@
+{
+  "name": "get-all-organizations",
+  "description": "Retrieve a list of all organizations. Returns all organizations the authenticated user has permission to view. Future support for pagination and filtering will be added.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {},
+    "required": [],
+    "additionalProperties": false
+  },
+  "annotations": {
+    "authentication": "required",
+    "httpMethod": "GET",
+    "endpoint": "/organizations",
+    "futureParameters": {
+      "page": {
+        "type": "number",
+        "description": "Page number for pagination (future feature, not yet implemented)"
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of results per page, maximum 100 (future feature, not yet implemented)"
+      },
+      "filter": {
+        "type": "string",
+        "description": "Filter criteria for searching organizations (future feature, not yet implemented)"
+      }
+    }
+  },
+  "examples": [
+    {
+      "description": "Get all organizations",
+      "input": {},
+      "expectedResponse": {
+        "data": [
+          {
+            "id": "org-123",
+            "name": "Acme Corporation",
+            "description": "Leading provider of innovative solutions",
+            "createdAt": "2025-11-20T10:00:00Z",
+            "updatedAt": "2025-11-20T10:00:00Z"
+          },
+          {
+            "id": "org-456",
+            "name": "TechStart Inc",
+            "description": "Startup focused on AI technologies",
+            "createdAt": "2025-11-19T15:30:00Z",
+            "updatedAt": "2025-11-20T09:15:00Z"
+          }
+        ]
+      }
+    }
+  ]
+}

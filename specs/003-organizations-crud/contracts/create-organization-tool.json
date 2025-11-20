@@ -1,0 +1,81 @@
+{
+  "name": "create-organization",
+  "description": "Create a new organization with a name and optional description. Returns the created organization with its system-assigned unique identifier. The organization name must be unique across the entire system.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Name of the organization (required, 1-255 characters). Must be unique across all organizations. This is the primary identifier users will see.",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "description": {
+        "type": "string",
+        "description": "Optional description of the organization. Provide context about the organization's purpose, role, or any relevant details. Can be omitted if not needed."
+      }
+    },
+    "required": ["name"],
+    "additionalProperties": false
+  },
+  "annotations": {
+    "authentication": "required",
+    "httpMethod": "POST",
+    "endpoint": "/organizations",
+    "successStatus": 201
+  },
+  "examples": [
+    {
+      "description": "Create organization with name and description",
+      "input": {
+        "name": "Acme Corporation",
+        "description": "Leading provider of innovative solutions"
+      },
+      "expectedResponse": {
+        "data": {
+          "id": "org-789",
+          "name": "Acme Corporation",
+          "description": "Leading provider of innovative solutions",
+          "createdAt": "2025-11-20T10:00:00Z",
+          "updatedAt": "2025-11-20T10:00:00Z"
+        }
+      }
+    },
+    {
+      "description": "Create organization with name only",
+      "input": {
+        "name": "TechStart Inc"
+      },
+      "expectedResponse": {
+        "data": {
+          "id": "org-790",
+          "name": "TechStart Inc",
+          "createdAt": "2025-11-20T10:05:00Z",
+          "updatedAt": "2025-11-20T10:05:00Z"
+        }
+      }
+    }
+  ],
+  "errors": [
+    {
+      "status": 409,
+      "description": "Organization with this name already exists",
+      "example": {
+        "error": {
+          "message": "Organization with this name already exists",
+          "code": "DUPLICATE_NAME"
+        }
+      }
+    },
+    {
+      "status": 400,
+      "description": "Invalid input - name missing or too long",
+      "example": {
+        "error": {
+          "message": "Organization name is required",
+          "code": "VALIDATION_ERROR"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Get Token Tool",
+  "description": "MCP tool for retrieving stored authentication token",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "const": "get-token",
+      "description": "Tool identifier"
+    },
+    "description": {
+      "type": "string",
+      "const": "Retrieve the currently stored JWT authentication token for use in protected endpoint calls"
+    },
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false,
+      "description": "No parameters required - retrieves token for current session"
+    },
+    "outputSchema": {
+      "oneOf": [
+        {
+          "title": "Authenticated Response",
+          "type": "object",
+          "properties": {
+            "authenticated": {
+              "type": "boolean",
+              "const": true
+            },
+            "token": {
+              "type": "string",
+              "description": "JWT authentication token",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+            },
+            "userId": {
+              "type": "string",
+              "description": "User identifier",
+              "example": "usr_1234567890"
+            }
+          },
+          "required": ["authenticated", "token"]
+        },
+        {
+          "title": "Not Authenticated Response",
+          "type": "object",
+          "properties": {
+            "authenticated": {
+              "type": "boolean",
+              "const": false
+            },
+            "token": {
+              "type": "null"
+            },
+            "userId": {
+              "type": "null"
+            },
+            "message": {
+              "type": "string",
+              "example": "No active session. Please login or signup first."
+            }
+          },
+          "required": ["authenticated", "token", "message"]
+        }
+      ]
+    }
+  },
+  "examples": [
+    {
+      "name": "User is authenticated",
+      "input": {},
+      "output": {
+        "authenticated": true,
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3JfMTIzNDU2Nzg5MCIsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSIsImlhdCI6MTcwMDQwMDAwMH0.xxx",
+        "userId": "usr_1234567890"
+      }
+    },
+    {
+      "name": "User is not authenticated",
+      "input": {},
+      "output": {
+        "authenticated": false,
+        "token": null,
+        "userId": null,
+        "message": "No active session. Please login or signup first."
+      }
+    }
+  ]
+}
