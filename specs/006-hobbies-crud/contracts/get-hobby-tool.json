@@ -1,0 +1,36 @@
+{
+  "name": "get-hobby",
+  "description": "Retrieve a specific hobby by its unique identifier (ID). The ID must be a non-empty string representing a valid hobby identifier. Returns the hobby details including name, description, and timestamps. Returns an error if the hobby is not found or if access is denied. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier of the hobby to retrieve (required, non-empty string)",
+        "minLength": 1
+      }
+    },
+    "required": ["id"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing hobby data with id, name, description, and timestamps"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "get-all-hobbies",
+  "description": "Retrieve a list of all hobbies. Returns all hobbies the authenticated user has permission to view. Future support for pagination and filtering will be added. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing array of hobby objects with id, name, description, and timestamps"
+            }
+          }
+        }
+      }
+    }
+  }
+}

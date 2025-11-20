@@ -59,6 +59,26 @@ import {
   deletePersonToolMetadata,
   deletePersonToolHandler,
 } from "../people-crud/tools/delete-person-tool.js";
+import {
+  getAllHobbiesToolMetadata,
+  getAllHobbiesToolHandler,
+} from "../hobbies-crud/tools/get-all-hobbies-tool.js";
+import {
+  createHobbyToolMetadata,
+  createHobbyToolHandler,
+} from "../hobbies-crud/tools/create-hobby-tool.js";
+import {
+  getHobbyToolMetadata,
+  getHobbyToolHandler,
+} from "../hobbies-crud/tools/get-hobby-tool.js";
+import {
+  updateHobbyToolMetadata,
+  updateHobbyToolHandler,
+} from "../hobbies-crud/tools/update-hobby-tool.js";
+import {
+  deleteHobbyToolMetadata,
+  deleteHobbyToolHandler,
+} from "../hobbies-crud/tools/delete-hobby-tool.js";
 
 const logger = createLogger("MCP Server");
 
@@ -227,6 +247,61 @@ export function createMcpServer(): McpServer {
       inputSchema: deletePersonToolMetadata.schema,
     },
     deletePersonToolHandler
+  );
+
+  // Register get-all-hobbies tool (Hobbies CRUD - User Story 1)
+  logger.info(`Registering tool: ${getAllHobbiesToolMetadata.name}`);
+  server.registerTool(
+    getAllHobbiesToolMetadata.name,
+    {
+      description: getAllHobbiesToolMetadata.description,
+      inputSchema: getAllHobbiesToolMetadata.schema,
+    },
+    getAllHobbiesToolHandler
+  );
+
+  // Register create-hobby tool (Hobbies CRUD - User Story 2)
+  logger.info(`Registering tool: ${createHobbyToolMetadata.name}`);
+  server.registerTool(
+    createHobbyToolMetadata.name,
+    {
+      description: createHobbyToolMetadata.description,
+      inputSchema: createHobbyToolMetadata.schema,
+    },
+    createHobbyToolHandler
+  );
+
+  // Register get-hobby tool (Hobbies CRUD - User Story 3)
+  logger.info(`Registering tool: ${getHobbyToolMetadata.name}`);
+  server.registerTool(
+    getHobbyToolMetadata.name,
+    {
+      description: getHobbyToolMetadata.description,
+      inputSchema: getHobbyToolMetadata.schema,
+    },
+    getHobbyToolHandler
+  );
+
+  // Register update-hobby tool (Hobbies CRUD - User Story 4)
+  logger.info(`Registering tool: ${updateHobbyToolMetadata.name}`);
+  server.registerTool(
+    updateHobbyToolMetadata.name,
+    {
+      description: updateHobbyToolMetadata.description,
+      inputSchema: updateHobbyToolMetadata.schema,
+    },
+    updateHobbyToolHandler
+  );
+
+  // Register delete-hobby tool (Hobbies CRUD - User Story 5)
+  logger.info(`Registering tool: ${deleteHobbyToolMetadata.name}`);
+  server.registerTool(
+    deleteHobbyToolMetadata.name,
+    {
+      description: deleteHobbyToolMetadata.description,
+      inputSchema: deleteHobbyToolMetadata.schema,
+    },
+    deleteHobbyToolHandler
   );
 
   logger.info("MCP server created successfully");

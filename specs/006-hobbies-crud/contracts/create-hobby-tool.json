@@ -1,0 +1,42 @@
+{
+  "name": "create-hobby",
+  "description": "Create a new hobby with the specified name and optional description. The name is required and must be between 1-255 characters. The description is optional and can be up to 1000 characters. Returns the newly created hobby with server-generated ID and timestamps. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "Hobby name (required, 1-255 characters, must be unique)",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "description": {
+        "type": "string",
+        "description": "Description of the hobby (optional, max 1000 characters)",
+        "maxLength": 1000
+      }
+    },
+    "required": ["name"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing success status and created hobby data with ID and timestamps"
+            }
+          }
+        }
+      }
+    }
+  }
+}

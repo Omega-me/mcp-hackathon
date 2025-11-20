@@ -1,0 +1,36 @@
+{
+  "name": "delete-hobby",
+  "description": "Permanently delete a hobby by its unique identifier (ID). The ID must be a non-empty string representing a valid hobby identifier. This operation is irreversible and will permanently remove the hobby. Returns a success confirmation message if the deletion is successful. Returns an error if the hobby is not found, has dependencies, or if access is denied. Hobbies with existing dependencies (e.g., linked entities) cannot be deleted. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier of the hobby to delete (required, non-empty string)",
+        "minLength": 1
+      }
+    },
+    "required": ["id"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing success status and confirmation message"
+            }
+          }
+        }
+      }
+    }
+  }
+}

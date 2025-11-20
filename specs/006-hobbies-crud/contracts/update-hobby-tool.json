@@ -1,0 +1,47 @@
+{
+  "name": "update-hobby",
+  "description": "Update an existing hobby with full body replacement (PUT semantics). Requires the hobby ID parameter and complete body with name and optional description. The name is required and must be between 1-255 characters. The description is optional and can be up to 1000 characters. This is a complete replacement operation - all fields must be provided. Returns the updated hobby with modified timestamps. Returns an error if the hobby is not found or if validation fails. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier of the hobby to update (required, non-empty string)",
+        "minLength": 1
+      },
+      "name": {
+        "type": "string",
+        "description": "Updated hobby name (required, 1-255 characters, must be unique)",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "description": {
+        "type": "string",
+        "description": "Updated description of the hobby (optional, max 1000 characters)",
+        "maxLength": 1000
+      }
+    },
+    "required": ["id", "name"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing success status and updated hobby data with modified timestamps"
+            }
+          }
+        }
+      }
+    }
+  }
+}
