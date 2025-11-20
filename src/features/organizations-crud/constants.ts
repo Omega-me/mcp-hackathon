@@ -8,6 +8,8 @@
  */
 export const ORGANIZATIONS_BASE_PATH = "/organizations";
 export const ORGANIZATIONS_BY_ID_PATH = (id: string) => `/organizations/${id}`;
+export const ORGANIZATIONS_TREE_PATH = (id: string) =>
+  `/organizations/${id}/tree`;
 
 /**
  * Validation Constants

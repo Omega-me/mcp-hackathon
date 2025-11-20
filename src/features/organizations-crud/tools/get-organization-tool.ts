@@ -4,9 +4,9 @@ import { getToken } from "../../jwt-auth/services/token-storage.js";
 import { createLogger } from "../../../shared/utils/logger.js";
 import { API_CONFIG } from "../../mcp-api-server/constants.js";
 import {
-  ORGANIZATIONS_BY_ID_PATH,
   ERROR_MESSAGES,
   HTTP_STATUS,
+  ORGANIZATIONS_TREE_PATH,
 } from "../constants.js";
 import { OrganizationIdSchema } from "../schemas/organization-schemas.js";
 import type { Organization } from "../types.js";
@@ -69,7 +69,7 @@ export async function getOrganizationToolHandler(params: unknown) {
     }
 
     // Construct API URL with organization ID
-    const url = `${API_CONFIG.BASE_URL}${ORGANIZATIONS_BY_ID_PATH(
+    const url = `${API_CONFIG.BASE_URL}${ORGANIZATIONS_TREE_PATH(
       validatedParams.id
     )}`;
     logger.debug("Making GET request to", { url });
