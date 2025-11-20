@@ -1,0 +1,45 @@
+{
+  "name": "get-all-people",
+  "description": "Retrieve a list of all people from the system. Returns all people the authenticated user has permission to view. Future support for pagination and filtering will be added. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "page": {
+        "type": "number",
+        "description": "Page number for pagination (future support, currently not implemented)",
+        "minimum": 1
+      },
+      "limit": {
+        "type": "number",
+        "description": "Number of results per page (future support, currently not implemented, max 100)",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "filter": {
+        "type": "string",
+        "description": "Text filter for searching people (future support, currently not implemented)"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing success status and array of people data"
+            }
+          }
+        }
+      }
+    }
+  }
+}

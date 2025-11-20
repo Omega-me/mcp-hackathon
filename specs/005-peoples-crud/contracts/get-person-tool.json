@@ -1,0 +1,36 @@
+{
+  "name": "get-person",
+  "description": "Retrieve a specific person by their unique identifier (ID). The ID must be a non-empty string representing a valid person identifier. Returns the person details including first name, last name, email, team ID, and timestamps. Returns an error if the person is not found or if access is denied. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier of the person to retrieve (required, non-empty string)",
+        "minLength": 1
+      }
+    },
+    "required": ["id"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing success status and person data"
+            }
+          }
+        }
+      }
+    }
+  }
+}

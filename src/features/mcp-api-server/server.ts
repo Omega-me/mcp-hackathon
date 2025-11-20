@@ -39,6 +39,26 @@ import {
   deleteOrganizationToolMetadata,
   deleteOrganizationToolHandler,
 } from "../organizations-crud/tools/delete-organization-tool.js";
+import {
+  getAllPeopleToolMetadata,
+  getAllPeopleToolHandler,
+} from "../people-crud/tools/get-all-people-tool.js";
+import {
+  createPersonToolMetadata,
+  createPersonToolHandler,
+} from "../people-crud/tools/create-person-tool.js";
+import {
+  getPersonToolMetadata,
+  getPersonToolHandler,
+} from "../people-crud/tools/get-person-tool.js";
+import {
+  updatePersonToolMetadata,
+  updatePersonToolHandler,
+} from "../people-crud/tools/update-person-tool.js";
+import {
+  deletePersonToolMetadata,
+  deletePersonToolHandler,
+} from "../people-crud/tools/delete-person-tool.js";
 
 const logger = createLogger("MCP Server");
 
@@ -152,6 +172,61 @@ export function createMcpServer(): McpServer {
       inputSchema: deleteOrganizationToolMetadata.schema,
     },
     deleteOrganizationToolHandler
+  );
+
+  // Register get-all-people tool (People CRUD - User Story 1)
+  logger.info(`Registering tool: ${getAllPeopleToolMetadata.name}`);
+  server.registerTool(
+    getAllPeopleToolMetadata.name,
+    {
+      description: getAllPeopleToolMetadata.description,
+      inputSchema: getAllPeopleToolMetadata.schema,
+    },
+    getAllPeopleToolHandler
+  );
+
+  // Register create-person tool (People CRUD - User Story 2)
+  logger.info(`Registering tool: ${createPersonToolMetadata.name}`);
+  server.registerTool(
+    createPersonToolMetadata.name,
+    {
+      description: createPersonToolMetadata.description,
+      inputSchema: createPersonToolMetadata.schema,
+    },
+    createPersonToolHandler
+  );
+
+  // Register get-person tool (People CRUD - User Story 3)
+  logger.info(`Registering tool: ${getPersonToolMetadata.name}`);
+  server.registerTool(
+    getPersonToolMetadata.name,
+    {
+      description: getPersonToolMetadata.description,
+      inputSchema: getPersonToolMetadata.schema,
+    },
+    getPersonToolHandler
+  );
+
+  // Register update-person tool (People CRUD - User Story 4)
+  logger.info(`Registering tool: ${updatePersonToolMetadata.name}`);
+  server.registerTool(
+    updatePersonToolMetadata.name,
+    {
+      description: updatePersonToolMetadata.description,
+      inputSchema: updatePersonToolMetadata.schema,
+    },
+    updatePersonToolHandler
+  );
+
+  // Register delete-person tool (People CRUD - User Story 5)
+  logger.info(`Registering tool: ${deletePersonToolMetadata.name}`);
+  server.registerTool(
+    deletePersonToolMetadata.name,
+    {
+      description: deletePersonToolMetadata.description,
+      inputSchema: deletePersonToolMetadata.schema,
+    },
+    deletePersonToolHandler
   );
 
   logger.info("MCP server created successfully");

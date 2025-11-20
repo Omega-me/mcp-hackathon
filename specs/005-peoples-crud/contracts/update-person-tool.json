@@ -1,0 +1,58 @@
+{
+  "name": "update-person",
+  "description": "Update an existing person with full body replacement (PUT semantics). Requires the person ID parameter and complete body with first name, last name, email, and optional team ID. The first name and last name are required and must be between 1-255 characters. The email is required and must be a valid email format. The team ID is optional and must be a positive integer. This is a complete replacement operation - all fields must be provided. Returns the updated person with modified timestamps. Returns an error if the person is not found or if validation fails. Requires authentication with a valid JWT token.",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier of the person to update (required, non-empty string)",
+        "minLength": 1
+      },
+      "firstName": {
+        "type": "string",
+        "description": "Person's updated first name (required, 1-255 characters)",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "lastName": {
+        "type": "string",
+        "description": "Person's updated last name (required, 1-255 characters)",
+        "minLength": 1,
+        "maxLength": 255
+      },
+      "email": {
+        "type": "string",
+        "description": "Person's updated email address (required, must be valid email format, unique)",
+        "format": "email"
+      },
+      "teamId": {
+        "type": "number",
+        "description": "Updated team ID for this person (optional, must be positive integer)",
+        "minimum": 1
+      }
+    },
+    "required": ["id", "firstName", "lastName", "email"]
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": {
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["text"]
+            },
+            "text": {
+              "type": "string",
+              "description": "JSON string containing success status and updated person data with new timestamps"
+            }
+          }
+        }
+      }
+    }
+  }
+}
